@@ -8,7 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
-    HomePageComponent
+    HomePageComponent // Todos los componentes, directivas y pipes que deseas utilizar en un módulo deben ser declarados en este arreglo
   ],
   imports: [
     CommonModule,
