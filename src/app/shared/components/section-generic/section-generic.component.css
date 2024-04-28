@@ -1,0 +1,19 @@
+.section_generic {
+    margin-bottom: 2rem;
+}
+
+.section_generic__player_zone .player_list {
+    display: grid;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.15rem;
+}
+
+.section_generic__player_zone .player_list.card-small {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.section_generic__player_zone .player_list.card-big {
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
