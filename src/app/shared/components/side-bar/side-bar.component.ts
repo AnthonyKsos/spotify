@@ -14,7 +14,7 @@ export class SideBarComponent implements OnInit{
   } = {defaultOptions: [], accessLink: []}
 
   customOptions: Array<any> = []
-  constructor(private router: Router, private trackService: TrackService) {}
+  constructor(private router: Router) {}
   ngOnInit(): void {
       this.mainMenu.defaultOptions = [
         {
@@ -62,12 +62,6 @@ export class SideBarComponent implements OnInit{
           router: ['/']
         }
       ]
-      this.trackService.dataTracksRandom$.subscribe((response: any) => {
-        this.customOptions.push({
-          name: response[0].name,
-          router: []
-        })
-      })
   }
 
   goTo($event: any): void {
