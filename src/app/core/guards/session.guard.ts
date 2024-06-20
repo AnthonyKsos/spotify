@@ -21,13 +21,11 @@ export class sessionGuard implements CanActivate {
       const token: boolean = this.cookieService.check('token')
       if(!token) {
         this.router.navigate(['/','auth'])
-
       }
       return token
     } catch (error) {
       console.log('Algo sucedio ??', error)
       return false
     }
-
   }
 }
