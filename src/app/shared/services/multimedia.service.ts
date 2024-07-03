@@ -20,6 +20,7 @@ export class MultimediaService {
     '-00:00'
   );
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused');
+  public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor() {
     this.audio = new Audio();
@@ -67,7 +68,14 @@ export class MultimediaService {
     console.table([duration, currentTime]); // para ver en la consola como tabla los datos
     this.setTimeElapsed(currentTime);
     this.setRemaining(currentTime, duration);
+    this.setPercentage(currentTime, duration);
   };
+
+  private setPercentage(currentTime: number, duration: number): void {
+    // duration: 100%. currentTime es lo calcularemos %
+    let percentage = (currentTime * 100) / duration;
+    this.playerPercentage$.next(percentage);
+  }
 
   private setTimeElapsed(currentTime: number): void {
     let seconds = Math.floor(currentTime % 60); // retorna volor entero de la div entre 60 (segundos)
@@ -97,5 +105,16 @@ export class MultimediaService {
 
   public togglePlayer(): void {
     this.audio.paused ? this.audio.play() : this.audio.pause();
+  }
+
+  public seekAudio(percentage: number): void {
+    const { duration } = this.audio;
+    console.log(`Duration : ${duration} ,Percentage : ${percentage} `);
+    // 100% ----> duration
+    // 70% -----> x
+    //indica a cuanto equivale el porcentaje que se indica de una ancion
+    const percentageToSecond = (percentage * duration) / 100;
+    console.log(percentageToSecond);
+    this.audio.currentTime = percentageToSecond;
   }
 }
